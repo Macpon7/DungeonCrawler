@@ -1,13 +1,16 @@
 #include "stdafx.h"
 #include "iostream"
+#include "random"
 #include "Generate.h"
 
 //Function that generates a random door position on the outer edge of the map
 pos Generate::Door(dimensions current)
 {
+	std::random_device rd;
+
 	pos out;
 
-	int iteration = rand() % 4;
+	int iteration = rd() % 4;
 	switch (iteration) {
 	case 0:
 		out.y = 0;
@@ -31,8 +34,22 @@ pos Generate::Door(dimensions current)
 //Function that generates a map of random-ish length and height
 dimensions Generate::Map()
 {
+	std::random_device rd;
+
 	dimensions out;
-	out.length = rand() % 5 + 7;
-	out.height = rand() % 3 + 5;
+	out.length = 11 + (rd() % 5);
+	out.height = 5 + (rd() % 3);
+	return out;
+}
+
+pos Generate::Rock(dimensions current, pos player, pos door)
+{
+	std::random_device rd;
+
+	pos out;
+	do {
+		out.x = rd() % (current.length - 1);
+		out.y = rd() % (current.height - 1);
+	} while ((out.x == player.x && out.y == player.y) || (out.y == door.y && out.x == door.x));
 	return out;
 }

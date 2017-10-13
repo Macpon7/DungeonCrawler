@@ -24,7 +24,7 @@ int main()
 	player.x = (map.length - 1) / 2;
 	door = gen.Door(map);
 
-	bool runnning = true;
+	bool running = true;
 	do {
 		print.Map(map, player, door);
 
@@ -36,7 +36,7 @@ int main()
 			player.y = (map.height - 1) / 2;
 			player.x = (map.length - 1) / 2;
 		}
-	} while (runnning);
+	} while (running);
 
 	cin.get();
 
