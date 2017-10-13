@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "iostream"
-#include "dc.h"
+#include "Print.h"
 using namespace std;
+
 
 //Function that prints the map, player and door
 void Print::Map(dimensions current, pos player, pos door)
