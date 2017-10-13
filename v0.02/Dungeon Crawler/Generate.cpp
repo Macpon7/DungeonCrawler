@@ -14,18 +14,18 @@ pos Generate::Door(dimensions current)
 	switch (iteration) {
 	case 0:
 		out.y = 0;
-		out.x = rand() % (current.length - 1);
+		out.x = rd() % (current.length - 1);
 		break;
 	case 1:
 		out.y = (current.height - 1);
-		out.x = rand() % (current.length - 1);
+		out.x = rd() % (current.length - 1);
 		break;
 	case 2:
-		out.y = rand() % (current.height - 1);
+		out.y = rd() % (current.height - 1);
 		out.x = 0;
 		break;
 	case 3:
-		out.y = rand() % (current.height - 1);
+		out.y = rd() % (current.height - 1);
 		out.x = (current.length - 1);
 		break;
 	}
