@@ -1,40 +1,59 @@
 #include "stdafx.h"
-#include "iostream"
-#include "Structs.h"
-#include "Player.h"
-#include "Print.h"
-#include "Generate.h"
+#include "stdafx.h"
+#include "DungeonRoom.h"
+#include "Combat.h"
+#include <conio.h>
+#include <iostream>
 
 using namespace std;
 
 int main()
 {
-	Generate gen;
-	Print print;
-	Player p;
+	DungeonRoom room; //When DungeonRoom is called, init(); is performed
+	Combat combat; //When Combat is called, init(); is performed
 	
-	//Structs containing all the information of the game
-	dimensions map;
-	pos player;
-	pos door;
-	
-	//Generates a starting map, player and door positions
-	map = gen.Map();
-	player.y = (map.height - 1) / 2;
-	player.x = (map.length - 1) / 2;
-	door = gen.Door(map);
-
 	bool running = true;
 	do {
-		print.Map(map, player, door);
+		room.displayRoom();
 
-		player = p.Move(player, map);
+		bool moved = false;
+		while (!moved) {
+			if (_getch() == 224) {
+				switch (_getch()) {
+				case 75: //Arrow left
+					if (room.playerPosition().x != 0) {
+						room.movePlayerLeft();
+						moved = true;
+					}
+					break;
+				case 77: //Arrow right
+					if (room.playerPosition().x != room.roomDimensions().width - 1) {
+						room.movePlayerRight();
+						moved = true;
+					}
+					break;
+				case 72: //Arrow up
+					if (room.playerPosition().y != 0) {
+						room.movePlayerUp();
+						moved = true;
+					}
+					break;
+				case 80: //Arrow down
+					if (room.playerPosition().y != room.roomDimensions().height - 1) {
+						room.movePlayerDown();
+						moved = true;
+					}
+					break;
+				}
+			}
+		}
 
-		if (player.x == door.x && player.y == door.y) {
-			map = gen.Map();
-			door = gen.Door(map);
-			player.y = (map.height - 1) / 2;
-			player.x = (map.length - 1) / 2;
+		if (room.playerIsOnEnemy()) {
+			combat.init();
+			combat.battle();
+		}
+		if (room.playerIsAtDoor()) {
+			room.init();
 		}
 	} while (running);
 

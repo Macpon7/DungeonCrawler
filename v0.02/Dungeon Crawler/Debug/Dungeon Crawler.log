@@ -1,5 +1,5 @@
-﻿  Player.cpp
-  Generate.cpp
-  Generating Code...
-  Dungeon Crawler.vcxproj -> C:\Users\Macpon7\OneDrive - NTNU\Git\DungeonCrawler\DungeonCrawler\v0.02\Debug\Dungeon Crawler.exe
-  Dungeon Crawler.vcxproj -> C:\Users\Macpon7\OneDrive - NTNU\Git\DungeonCrawler\DungeonCrawler\v0.02\Debug\Dungeon Crawler.pdb (Partial PDB)
+﻿  Combat.cpp
+c:\users\macpon7\documents\github\dungeoncrawler\dungeoncrawler\v0.02\dungeon crawler\combat.cpp(31): warning C4018: '>=': signed/unsigned mismatch
+c:\users\macpon7\documents\github\dungeoncrawler\dungeoncrawler\v0.02\dungeon crawler\combat.cpp(44): warning C4018: '>=': signed/unsigned mismatch
+  Dungeon Crawler.vcxproj -> C:\Users\Macpon7\Documents\GitHub\DungeonCrawler\DungeonCrawler\v0.02\Debug\Dungeon Crawler.exe
+  Dungeon Crawler.vcxproj -> C:\Users\Macpon7\Documents\GitHub\DungeonCrawler\DungeonCrawler\v0.02\Debug\Dungeon Crawler.pdb (Partial PDB)

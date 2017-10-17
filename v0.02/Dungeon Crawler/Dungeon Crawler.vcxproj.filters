@@ -27,13 +27,10 @@
     <ClInclude Include="Structs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Print.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Generate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonRoom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,16 +38,19 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Print.cpp">
+    <ClCompile Include="Generate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Generate.cpp">
+    <ClCompile Include="DungeonRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
