@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "Combat.h"
 #include "Structs.h"
+#ifndef __APPLE__
 #include <conio.h>
+#else
+#include <ncurses.h>
+#define _getch getchar
+#endif
 #include <random>
 #include <iostream>
 
@@ -15,8 +20,11 @@ void Combat::init() {
 void Combat::battle() {
 	bool fighting = true;
 	std::random_device rd;
+#ifndef __APPLE__
 	std::system("CLS");
-
+#else
+    std::system("clear");
+#endif
 	do {
 		//Prints the player health, enemy health, and actions the player can take
 		std::cout << "\n" << player.name << ": " << player.health << " HP\n"

@@ -4,6 +4,12 @@
 #include "Combat.h"
 #include <iostream>
 
+#ifdef __APPLE__
+#include <stdio.h>
+#include <unistd.h>
+#include <termios.h>
+#endif
+
 void DungeonRoom::init() {
 	Generate gen;
 	dim = gen.map();
@@ -32,7 +38,11 @@ void DungeonRoom::fillRoom() {
 	}
 }
 void DungeonRoom::displayRoom() {
+#ifndef __APPLE__
 	std::system("CLS"); //Clears the console
+#else
+    std::system("clear"); //Clears the console
+#endif
 	fillRoom(); //Fills the map with '#'
 	setDoorPosition(); //Places the door
 	setEnemyPosition(); //Places the enemy

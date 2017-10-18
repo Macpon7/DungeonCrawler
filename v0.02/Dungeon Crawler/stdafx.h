@@ -8,8 +8,9 @@
 #include "targetver.h"
 
 #include <stdio.h>
+#ifndef __APPLE__
 #include <tchar.h>
-
+#endif
 
 
 // TODO: reference additional headers your program requires here
