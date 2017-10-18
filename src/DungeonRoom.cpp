@@ -10,18 +10,19 @@
 #include <termios.h>
 #endif
 
+DungeonRoom::DungeonRoom() {
+	init();
+}
+
 void DungeonRoom::init() {
 	Generate gen;
 	dim = gen.map();
 	door = gen.door(dim);
 	player = gen.player(dim);
 	enemy = gen.enemy(dim);
+	playerBlocked.assign(4, false);
 
 	createRoom();
-}
-
-DungeonRoom::DungeonRoom() {
-	init();
 }
 
 void DungeonRoom::createRoom() {
@@ -36,18 +37,18 @@ void DungeonRoom::fillRoom() {
 			map[i][j] = '#';
 		}
 	}
+	map[door.y][door.x] = 'D';		//Places the door, enemy, and player on the map
+	map[enemy.y][enemy.x] = 'E';
+	map[player.y][player.x] = 'P';
 }
 void DungeonRoom::displayRoom() {
 #ifndef __APPLE__
 	std::system("CLS"); //Clears the console
 #else
-    std::system("clear"); //Clears the console
+	std::system("clear"); //Clears the console
 #endif
 	fillRoom(); //Fills the map with '#'
-	setDoorPosition(); //Places the door
-	setEnemyPosition(); //Places the enemy
-	setPlayerPosition(); //Places the player
-	
+
 	for (std::size_t i = 0; i < map.size(); i++) {
 		for (std::size_t j = 0; j < map[0].size(); j++) { //Prints the map
 			std::cout << map[i][j];
@@ -56,17 +57,51 @@ void DungeonRoom::displayRoom() {
 	}
 }
 
-void DungeonRoom::movePlayerLeft() {
-	player.x--;
+void DungeonRoom::movePlayerUp() {
+	if (!playerBlocked[0]) {
+		player.y--;
+		playerActed = true;
+	}
 }
 void DungeonRoom::movePlayerRight() {
-	player.x++;
-}
-void DungeonRoom::movePlayerUp() {
-	player.y--;
+	if (!playerBlocked[1]) {
+		player.x++;
+		playerActed = true;
+	}
 }
 void DungeonRoom::movePlayerDown() {
-	player.y++;
+	if (!playerBlocked[2]) {
+		player.y++;
+		playerActed = true;
+	}
+}
+void DungeonRoom::movePlayerLeft() {
+	if (!playerBlocked[3]) {
+		player.x--;
+		playerActed = true;
+	}
+}
+
+bool DungeonRoom::hasPlayerActed() {
+	return playerActed;
+}
+void DungeonRoom::setPlayerActed(bool in) {
+	playerActed = in;
+}
+
+void DungeonRoom::checkPlayerBlock() {
+	//Checks if the player is blocked by walls
+	if (player.y - 1 < 0) playerBlocked[0] = true; //Above the player
+	else playerBlocked[0] = false;
+
+	if (player.x + 2 > map[0].size()) playerBlocked[1] = true; //To the right of the player
+	else playerBlocked[1] = false;
+
+	if (player.y + 2 > map.size()) playerBlocked[2] = true; //Below the player
+	else playerBlocked[2] = false;
+
+	if (player.x - 1 < 0) playerBlocked[3] = true; //To the left of the player
+	else playerBlocked[3] = false;
 }
 
 bool DungeonRoom::playerIsAtDoor() {
@@ -85,26 +120,24 @@ bool DungeonRoom::playerIsOnEnemy() {
 Position DungeonRoom::playerPosition() {
 	return player;
 }
-void DungeonRoom::setPlayerPosition() {
-	map[player.y][player.x] = 'P';
+void DungeonRoom::setPlayerPosition(Position in) {
+	player.x = in.x;
+	player.y = in.y;
 }
 
 Position DungeonRoom::doorPosition() {
 	return door;
 }
-void DungeonRoom::setDoorPosition() {
+void DungeonRoom::setDoorPosition(Position in) {
 	map[door.y][door.x] = 'D';
 }
 
 Position DungeonRoom::enemyPosition() {
 	return enemy;
 }
-void DungeonRoom::setEnemyPosition() {
-	Combat combat;
-	if (combat.enemyIsAlive())
-		map[enemy.y][enemy.x] = 'E';
-	if (!combat.enemyIsAlive())
-		map[enemy.y][enemy.x] = 'X';
+void DungeonRoom::setEnemyPosition(Position in) {
+	enemy.x = in.x;
+	enemy.y = in.y;
 }
 
 Dimensions DungeonRoom::roomDimensions() {

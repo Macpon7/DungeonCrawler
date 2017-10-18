@@ -23,7 +23,7 @@ void Combat::battle() {
 #ifndef __APPLE__
 	std::system("CLS");
 #else
-    std::system("clear");
+	std::system("clear");
 #endif
 	do {
 		//Prints the player health, enemy health, and actions the player can take
@@ -34,7 +34,7 @@ void Combat::battle() {
 
 		bool acted = false;
 		while (!acted) {
-		//Waits for key input
+			//Waits for key input
 			if (_getch() == '1') { //If the player presses 1 
 				if ((rd() % 20) + player.attack >= enemy.defense) {
 					std::cout << "You hit " << enemy.name << " for " << player.damage << " damage.\n";

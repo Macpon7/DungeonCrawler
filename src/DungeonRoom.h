@@ -18,21 +18,27 @@ public:
 	void movePlayerUp();
 	void movePlayerDown();
 
+	bool hasPlayerActed();
+	void setPlayerActed(bool in);
+
+	void checkPlayerBlock();
 	bool playerIsAtDoor();
 	bool playerIsOnEnemy();
 
 	Position playerPosition();
-	void setPlayerPosition();
+	void setPlayerPosition(Position in);
 
 	Position doorPosition();
-	void setDoorPosition();
+	void setDoorPosition(Position in);
 
 	Position enemyPosition();
-	void setEnemyPosition();
+	void setEnemyPosition(Position in);
 
 	Dimensions roomDimensions();
 private:
 	std::vector<std::vector<char>> map;
+	std::vector<bool> playerBlocked;
+	bool playerActed;
 	Dimensions dim;
 	Position player;
 	Position door;
